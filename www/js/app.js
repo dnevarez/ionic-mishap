@@ -37,6 +37,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
 })
 
 .controller('MapCtrl', function($scope, $state, $cordovaGeolocation) {
+
   var options = {timeout: 10000, enableHighAccuracy: true};
 
   $cordovaGeolocation.getCurrentPosition(options).then(function(position){

@@ -50,9 +50,38 @@ angular.module('starter', ['ionic', 'ngCordova'])
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+    // Initialize Map
+
     $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    // Now that the map exists we can add a marker and popup window.
+
+    google.maps.event.addListenerOnce($scope.map, 'idle', function(){
+
+      // Marker
+
+      var marker = new google.maps.Marker({
+          map: $scope.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
+      });
+
+      // Pop up window with information
+
+      var infoWindow = new google.maps.InfoWindow({
+          content: "Here I am!"
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+          infoWindow.open($scope.map, marker);
+      });
+
+    });
 
   }, function(error){
     console.log("Could not get location");
   });
+
+
+
 });
